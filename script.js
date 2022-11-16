@@ -177,3 +177,14 @@ console.log('filtered array: ', filtered);
 
 const doubled = numbers.map((number) => number * 2);
 console.log('doubled: ', doubled);
+
+const getMoviesByName = async (movieName) => {
+  const result = await fetch(
+    `https://www.omdbapi.com/?t=${movieName}&apikey=9aea0f73`
+  );
+  const movie = await result.json();
+  console.log(movie);
+};
+
+getMoviesByName('spiderman');
+getMoviesByName('wolverine');

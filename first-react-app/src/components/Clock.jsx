@@ -14,6 +14,10 @@ class Clock extends Component {
     }, 1000);
   }
 
+  componentWillUnmount() {
+    // document.querySelector('input').removeEventListener();
+  }
+
   tick() {
     this.setState({ date: new Date().toLocaleTimeString() });
   }

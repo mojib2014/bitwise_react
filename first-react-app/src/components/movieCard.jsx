@@ -1,5 +1,11 @@
 import './movieCard.css';
 
+/**
+  name: props 
+  {}
+  props { title: 'Black hawk', type: '', posterUrl: '', name: 'Mojib'}
+ */
+
 export default function MovieCard({ title, type, posterUrl }) {
   return (
     <div className="movie-card">
