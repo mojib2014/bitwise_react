@@ -3,8 +3,11 @@ import MovieDetails from './components/movieDetails';
 import Greeting from './components/Greeting';
 import Movies from './components/Movies';
 import Clock from './components/Clock';
-import { getMoviesByName } from './utils';
+import { getMoviesByName, getMovieById } from './utils';
 import './App.css';
+import Box from './components/Box';
+import Form from './components/Form';
+import Modal from './components/Modal';
 
 const Message = (props) => (
   <div>
@@ -14,8 +17,10 @@ const Message = (props) => (
 
 function App() {
   const [movies, setMovies] = useState([]);
+  const [movie, setMovie] = useState({});
   const [searchTerm, setSearchTerm] = useState('Black Hawk');
   const [isLoading, setIsLoading] = useState(false);
+  const [open, setOpen] = useState(false);
   const [error, setError] = useState(null);
 
   async function getMovies() {
@@ -33,6 +38,12 @@ function App() {
     }
   }
 
+  const handleGetMovieById = async (movieId) => {
+    const res = await getMovieById(movieId);
+    const movie = await res.json();
+    setMovie(movie);
+  };
+
   const handleSubmit = () => {
     if (searchTerm !== '') getMovies();
   };
@@ -43,10 +54,17 @@ function App() {
     return () => {};
   }, [searchTerm]);
 
-  console.log('errorrrrrrr', error);
-
   return (
     <div className="App">
+      {open && (
+        <Modal>
+          <MovieDetails movie={movie} />
+        </Modal>
+      )}
+      <Form />
+      <Box className="large" children="Box Large" />
+      <Box className="medium">Box Medium</Box>
+      <Box className="small">Box Small</Box>
       <Clock date={new Date().toLocaleTimeString()} />
       <Greeting />
       {isLoading ? (
@@ -54,13 +72,13 @@ function App() {
       ) : error ? (
         <h1>Sorry something went wrong, {error}</h1>
       ) : (
-        <Movies movies={movies} setSearchTerm={setSearchTerm} />
+        <Movies
+          handleGetMovieById={handleGetMovieById}
+          movies={movies}
+          setSearchTerm={setSearchTerm}
+          setOpen={setOpen}
+        />
       )}
-
-      <MovieDetails />
-
-      <Message msg="Hello John!" />
-      <Message msg="Hello Smith!" />
     </div>
   );
 }

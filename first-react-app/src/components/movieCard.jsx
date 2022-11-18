@@ -6,7 +6,18 @@ import './movieCard.css';
   props { title: 'Black hawk', type: '', posterUrl: '', name: 'Mojib'}
  */
 
-export default function MovieCard({ title, type, posterUrl }) {
+export default function MovieCard({
+  title,
+  type,
+  posterUrl,
+  movieId,
+  handleGetMovieById,
+  setOpen,
+}) {
+  const handleClick = () => {
+    handleGetMovieById(movieId);
+    setOpen(true);
+  };
   return (
     <div className="movie-card">
       <img src={posterUrl} alt={title} />
@@ -14,7 +25,7 @@ export default function MovieCard({ title, type, posterUrl }) {
         <h3>{title}</h3>
       </div>
 
-      <button>Movie</button>
+      <button onClick={handleClick}>Movie</button>
     </div>
   );
 }

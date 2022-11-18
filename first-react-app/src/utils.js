@@ -4,8 +4,23 @@ export function getMoviesByName(name) {
   );
 }
 
-export function getMoviesById() {
+export function getMovieById(movieId) {
   return fetch(
-    `http://www.omdbapi.com/?apikey=${process.env.REACT_APP_API_KEY}&i=tt0100669`
+    `http://www.omdbapi.com/?apikey=${process.env.REACT_APP_API_KEY}&i=${movieId}`
   );
 }
+
+class Person {
+  constructor(name) {
+    this.name = name;
+  }
+
+  talk() {
+    console.log(this.name, this);
+  }
+}
+
+const john = new Person('John');
+
+console.log(john.name);
+console.log(john.talk);

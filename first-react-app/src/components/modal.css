@@ -1,0 +1,14 @@
+.modal-root {
+  background-color: rgb(198, 196, 196, 0.5);
+  display: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 1;
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+}

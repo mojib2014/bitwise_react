@@ -1,15 +1,11 @@
 import MovieCard from './movieCard';
 
-function Movies({ movies, setSearchTerm }) {
+function Movies({ movies, setSearchTerm, handleGetMovieById, setOpen }) {
   console.log('our movies: ', movies);
 
   return (
     <>
-      <input
-        type="search"
-        name="searchTerm"
-        onChange={(e) => setSearchTerm(e.target.value)}
-      />
+      <input type="search" name="searchTerm" onChange={setSearchTerm} />
       <div className="movies row">
         {movies?.map((movie) => (
           <MovieCard
@@ -17,6 +13,9 @@ function Movies({ movies, setSearchTerm }) {
             title={movie.Title}
             type={movie.Type}
             posterUrl={movie.Poster}
+            movieId={movie.imdbID}
+            handleGetMovieById={handleGetMovieById}
+            setOpen={setOpen}
           />
         ))}
       </div>
