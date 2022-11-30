@@ -9,18 +9,31 @@
         <!-- <script type="module" src="index.js" defer></script>
         <script src="script.js" type="module" defer></script>
         <script src="add.js" type="module"></script> -->
+        <style>
+            .container {
+                background-color: red;
+            }
+        </style>
     </head>
 
     <body>
-        <div id="root" style=""></div>
+        <div id="container" style="background-color: red;"></div>
+        <div class="container">container</div>
+        <div class="container">container</div>
+        <div class="container">container</div>
+        <div class="container">container</div>
         <input type="text" name="first-name">
         <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
         <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
         <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
         <script type="text/babel">
-
+            const container = document.getElementById('container');
             const element = React.createElement('div', { children: ['Hello World', 'something else'] });
             console.log(element);
+            // Promise
+            /**
+             * An object { pending, fulfilled, rejected}
+             */
         </script>
     </body>
 
