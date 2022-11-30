@@ -20,9 +20,9 @@ export default function Greeting() {
 
   return (
     <div>
-      {movies.map((movie) => (
+      {/* {movies.map((movie) => (
         <h1 key={movie.imdbID}>{movie.title}</h1>
-      ))}
+      ))} */}
     </div>
   );
 }

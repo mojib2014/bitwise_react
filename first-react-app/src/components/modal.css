@@ -1,6 +1,6 @@
 .modal-root {
-  background-color: rgb(198, 196, 196, 0.5);
-  display: absolute;
+  background-color: rgba(161, 153, 153, 0.94);
+  position: fixed;
   top: 0;
   right: 0;
   left: 0;
@@ -9,6 +9,31 @@
 }
 
 .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
   width: 80%;
+  height: 80vh;
   margin: 0 auto;
+  padding: 10px;
+}
+
+.col {
+  flex: 1;
+}
+
+.modal-root button {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  background-color: red;
+  cursor: pointer;
+}
+
+@media (max-width: 800px) {
+  .row {
+    flex-direction: column;
+    justify-items: center;
+  }
 }

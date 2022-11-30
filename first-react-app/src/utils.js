@@ -1,6 +1,6 @@
-export function getMoviesByName(name) {
+export function getMoviesByName(name, type) {
   return fetch(
-    `http://www.omdbapi.com/?apikey=${process.env.REACT_APP_API_KEY}&s=${name}`
+    `http://www.omdbapi.com/?apikey=${process.env.REACT_APP_API_KEY}&s=${name}&type=${type}`
   );
 }
 

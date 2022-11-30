@@ -19,7 +19,7 @@ export default function MovieCard({
     setOpen(true);
   };
   return (
-    <div className="movie-card">
+    <div className="movie-card col">
       <img src={posterUrl} alt={title} />
       <div className="card-body">
         <h3>{title}</h3>

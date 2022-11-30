@@ -4,8 +4,8 @@ import './modal.css';
 export default function Modal(props) {
   return (
     <div className="modal-root">
-      <button>X</button>
       <div className="container">{props.children}</div>
+      <button onClick={() => props.onCloseModal(false)}>X</button>
     </div>
   );
 }

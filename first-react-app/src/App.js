@@ -4,10 +4,12 @@ import Greeting from './components/Greeting';
 import Movies from './components/Movies';
 import Clock from './components/Clock';
 import { getMoviesByName, getMovieById } from './utils';
-import './App.css';
 import Box from './components/Box';
 import Form from './components/Form';
 import Modal from './components/Modal';
+import { useRef } from 'react';
+import './App.css';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 const Message = (props) => (
   <div>
@@ -18,7 +20,8 @@ const Message = (props) => (
 function App() {
   const [movies, setMovies] = useState([]);
   const [movie, setMovie] = useState({});
-  const [searchTerm, setSearchTerm] = useState('Black Hawk');
+  const [searchTerm, setSearchTerm] = useState('Batman');
+  const [type, setType] = useState('comedy');
   const [isLoading, setIsLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const [error, setError] = useState(null);
@@ -44,20 +47,28 @@ function App() {
     setMovie(movie);
   };
 
-  const handleSubmit = () => {
-    if (searchTerm !== '') getMovies();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log('Search Term ', searchTerm);
+    const result = await getMoviesByName(searchTerm, type);
+    const { Search } = await result.json();
+    console.log('Search: ', Search);
+
+    setMovies(Search);
   };
 
   useEffect(() => {
     getMovies();
-    document.querySelector('input').addEventListener('click', () => {});
+    // document.querySelector('input').addEventListener('click', () => {});
     return () => {};
-  }, [searchTerm]);
+  }, []);
+
+  console.log(type);
 
   return (
     <div className="App">
       {open && (
-        <Modal>
+        <Modal onCloseModal={setOpen}>
           <MovieDetails movie={movie} />
         </Modal>
       )}
@@ -76,7 +87,9 @@ function App() {
           handleGetMovieById={handleGetMovieById}
           movies={movies}
           setSearchTerm={setSearchTerm}
+          onTypeChange={setType}
           setOpen={setOpen}
+          onSubmit={handleSubmit}
         />
       )}
     </div>
