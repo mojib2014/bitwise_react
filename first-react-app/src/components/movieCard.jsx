@@ -1,4 +1,5 @@
 import './movieCard.css';
+import { Button } from '../common/button';
 
 /**
   name: props 
@@ -25,7 +26,13 @@ export default function MovieCard({
         <h3>{title}</h3>
       </div>
 
-      <button onClick={handleClick}>Movie</button>
+      <Button
+        primary={true}
+        onClick={handleClick}
+        className="btn btn-danger fs-1"
+      >
+        Movie
+      </Button>
     </div>
   );
 }

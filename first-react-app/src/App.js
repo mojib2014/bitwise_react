@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import MovieDetails from './components/movieDetails';
 import Greeting from './components/Greeting';
 import Movies from './components/Movies';
@@ -7,6 +7,8 @@ import { getMoviesByName, getMovieById } from './utils';
 import Box from './components/Box';
 import Form from './components/Form';
 import Modal from './components/Modal';
+import styles from './components/Box.module.css';
+import Alert from 'react-bootstrap/Alert';
 import { useRef } from 'react';
 import './App.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
@@ -47,15 +49,18 @@ function App() {
     setMovie(movie);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log('Search Term ', searchTerm);
-    const result = await getMoviesByName(searchTerm, type);
-    const { Search } = await result.json();
-    console.log('Search: ', Search);
+  const handleSubmit = useCallback(
+    async (e) => {
+      e.preventDefault();
+      console.log('Search Term ', searchTerm);
+      const result = await getMoviesByName(searchTerm, type);
+      const { Search } = await result.json();
+      console.log('Search: ', Search);
 
-    setMovies(Search);
-  };
+      setMovies(Search);
+    },
+    [searchTerm, type]
+  );
 
   useEffect(() => {
     getMovies();
@@ -67,15 +72,16 @@ function App() {
 
   return (
     <div className="App">
+      <Alert variant="warning">This is React bootstrap alert component</Alert>
       {open && (
         <Modal onCloseModal={setOpen}>
           <MovieDetails movie={movie} />
         </Modal>
       )}
       <Form />
-      <Box className="large" children="Box Large" />
-      <Box className="medium">Box Medium</Box>
-      <Box className="small">Box Small</Box>
+      <Box className={styles.boxLarge} children="Box Large" />
+      <Box className={styles.boxMedium}>Box Medium</Box>
+      <Box className={styles.boxSmall}>Box Small</Box>
       <Clock date={new Date().toLocaleTimeString()} />
       <Greeting />
       {isLoading ? (

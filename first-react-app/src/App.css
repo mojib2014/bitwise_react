@@ -10,21 +10,5 @@ body {
 }
 
 .box {
-  border: 2px solid black;
-}
-
-.box-large {
-  background-color: orange;
-  width: 300px;
-  height: 300px;
-}
-.box-medium {
-  background-color: blue;
-  width: 200px;
-  height: 200px;
-}
-.box-small {
-  background-color: green;
-  width: 100px;
-  height: 100px;
+  border: 10px dotted red;
 }
