@@ -1,5 +1,7 @@
 import './movieCard.css';
 import { Button } from '../common/button';
+import { useContext } from 'react';
+import { UserContext } from '../context/userContext';
 
 /**
   name: props 
@@ -19,8 +21,10 @@ export default function MovieCard({
     handleGetMovieById(movieId);
     setOpen(true);
   };
+  const user = useContext(UserContext);
   return (
     <div className="movie-card col">
+      <h1>{user.name}</h1>
       <img src={posterUrl} alt={title} />
       <div className="card-body">
         <h3>{title}</h3>

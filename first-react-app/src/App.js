@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, createContext } from 'react';
 import MovieDetails from './components/movieDetails';
 import Greeting from './components/Greeting';
 import Movies from './components/Movies';
@@ -9,7 +9,7 @@ import Form from './components/Form';
 import Modal from './components/Modal';
 import styles from './components/Box.module.css';
 import Alert from 'react-bootstrap/Alert';
-import { useRef } from 'react';
+import UserProvider from './context/userContext';
 import './App.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
@@ -71,34 +71,36 @@ function App() {
   console.log(type);
 
   return (
-    <div className="App">
-      <Alert variant="warning">This is React bootstrap alert component</Alert>
-      {open && (
-        <Modal onCloseModal={setOpen}>
-          <MovieDetails movie={movie} />
-        </Modal>
-      )}
-      <Form />
-      <Box className={styles.boxLarge} children="Box Large" />
-      <Box className={styles.boxMedium}>Box Medium</Box>
-      <Box className={styles.boxSmall}>Box Small</Box>
-      <Clock date={new Date().toLocaleTimeString()} />
-      <Greeting />
-      {isLoading ? (
-        <h1>Loading...</h1>
-      ) : error ? (
-        <h1>Sorry something went wrong, {error}</h1>
-      ) : (
-        <Movies
-          handleGetMovieById={handleGetMovieById}
-          movies={movies}
-          setSearchTerm={setSearchTerm}
-          onTypeChange={setType}
-          setOpen={setOpen}
-          onSubmit={handleSubmit}
-        />
-      )}
-    </div>
+    <UserProvider>
+      <div className="App">
+        <Alert variant="warning">This is React bootstrap alert component</Alert>
+        {open && (
+          <Modal onCloseModal={setOpen}>
+            <MovieDetails movie={movie} />
+          </Modal>
+        )}
+        <Form />
+        <Box className={styles.boxLarge} children="Box Large" />
+        <Box className={styles.boxMedium}>Box Medium</Box>
+        <Box className={styles.boxSmall}>Box Small</Box>
+        <Clock date={new Date().toLocaleTimeString()} />
+        <Greeting />
+        {isLoading ? (
+          <h1>Loading...</h1>
+        ) : error ? (
+          <h1>Sorry something went wrong, {error}</h1>
+        ) : (
+          <Movies
+            handleGetMovieById={handleGetMovieById}
+            movies={movies}
+            setSearchTerm={setSearchTerm}
+            onTypeChange={setType}
+            setOpen={setOpen}
+            onSubmit={handleSubmit}
+          />
+        )}
+      </div>
+    </UserProvider>
   );
 }
 

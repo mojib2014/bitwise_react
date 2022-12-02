@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+import { UserContext } from '../context/userContext';
 import MovieCard from './movieCard';
 
 function Movies({
@@ -8,8 +10,10 @@ function Movies({
   setOpen,
   onSubmit,
 }) {
+  const { user, addUser } = useContext(UserContext);
   return (
     <>
+      <h1>{JSON.stringify(user, null, 2)}</h1>
       <div className="container">
         <form
           onSubmit={onSubmit}
